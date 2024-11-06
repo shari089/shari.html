@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PDD News</title>
+        <link rel="icon" href="icon.jpg" type="image/gif">
+        <style>
+            /* Main + Header*/
+            body {
+                margin: 0;
+                background-color: #f4f4f4;
+                overflow-y: auto;
+            }
+            .box {
+                padding: 20px;
+                border: 3px solid #0d0d0d;
+                background-color: #0d0d0d;
+                position: relative;
+            }
+            .nav {
+                padding: 20px;
+                border: 3px solid #0d0d0d;
+                background-color: #0d0d0d;
+                position: relative;
+            }
+            h1 {
+                margin: 10px;
+                text-align: center;
+                color: #A52A2A;
+                font-family: Copperplate, Fantasy;
+            }
+            .icon-container {
+                position: absolute;
+                top: 50px;
+                left: 50px;
+            }
+            .icon {
+                width: 50px;
+                height: auto;
+            }
+            .pdd {
+                text-align: center; 
+                font-size: 60px;
+                font-weight: bold;
+                font-family: Copperplate, Fantasy;
+                color: #cf3737;
+            }
+            .pdd:hover {
+                color: rgb(255, 70, 85);
+                transition-duration: 0.3s;
+            }
+
+            /* Search bar */
+            .search-bar {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                display: flex;
+                align-items: center;
+            }
+            .search-bar input[type="text"] {
+                padding: 6px;
+                font-size: 18px;
+                border: 1px solid #ccc;
+            }
+            .search-bar-icon {
+                width: 20px;
+                height: auto;
+                margin-left: 7px;
+            }
+            
+            /* Nav */
+            .nav-ul {
+                list-style-type: none;
+                margin: 0px;
+                padding: 0px;
+            }
+            .nav-a {
+                text-decoration: none;
+                color: #ffffff;
+                font-family: 'Arial Narrow Bold', sans-serif;
+                font-weight: bold;
+            }
+            .nav-h .nav-ul {
+                display: flex;
+                justify-content: center;
+            }
+            .nav-h li {
+                width: 190px;
+                float: left;
+            }
+            .nav-h .nav-a  {
+                display: block;
+                background: rgb(26, 24, 24);
+                padding: 15px 20px;
+                text-align: center;
+            }
+            .nav-h .nav-a:hover, .nav-h #nav-active1:hover  {
+                color: white;
+                background: rgb(82, 82, 82);
+                
+            }
+            .nav-a#nav-active1 {
+                color: rgb(255, 255, 255);
+                background: rgb(57, 57, 57);
+            }
+
+            /* Section + article + vid */
+            .section {
+                position: absolute;
+                margin-left: 450px;
+                z-index: 1;
+            }
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;
+                border-radius: 10px;
+                transition: transform 0.3s;
+                margin-top: 20px;
+            }
+            .center:hover {
+                transform: scale(1.05);
+            }
+            .caption {
+                color: #0d0d0d;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                font-size: 40px;
+                margin-top: 10px;
+                text-align: center;
+            }
+            .caption:hover {
+                color: rgb(255, 70, 85);
+                transition-duration: 0.3s;
+            }
+            .content {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 20px;
+                max-width: 800px;
+                margin: 20px auto;
+                background: white;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .vid {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 10px;
+                margin-top: 10px;
+            }
+
+            /* Aside */
+            .asides {
+                padding-bottom: 135cap;
+            }
+            aside.left {
+                position: absolute;
+                margin-left: 5px;
+                width: 400px;
+                padding: 20px;
+                background-color: transparent;
+            }
+            aside.right {
+                position: absolute;
+                margin-left: 1480px;
+                width: 400px;
+                padding: 20px;
+                background-image: linear-gradient(rgb(255, 70, 85), rgb(180, 0, 0));
+                background-size: auto;
+                margin-top: 10px;
+                margin-right: 30px;
+            }
+            .header {
+                color: rgb(15, 25, 35); 
+                font-family: Tungsten-Bold, Impact, sans-serif;
+                font-size: 30px;
+                font-weight: 400; 
+            }
+            .visuals {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .parent {
+                width: 380px;
+                height: 214px;
+                overflow: hidden;
+                position: relative;
+                cursor: pointer;
+                box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.5);
+                border-radius: 10px;
+            }
+            .child {
+                height: 100%;
+                width: 100%;
+                background-size: cover;
+                transition: all 0.5s;
+                transition-timing-function: ease-in-out;
+                transition-delay: 0s;
+            }
+            .parent:hover .child {
+                transform: scale(1.125);
+            }
+            .logo {
+                color: rgb(255, 70, 85);
+                font-family: DINNextW1G, Impact, sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                letter-spacing: 1px;
+            }
+            .border {
+                color: rgb(188, 185, 180);
+                font-size: 14px;
+                font-family: DINNextW1G, Impact, sans-serif;
+                font-weight: 400;
+            }
+            .border:hover {
+                color: rgb(255, 70, 85);
+                transition-duration: 0.3s;
+            }
+            .date {
+                color: rgb(15, 25, 35);
+                font-family: DINNextW1G, Impact, sans-serif;
+                font-weight: 300;
+                font-size: 14px;
+            }
+            .date:hover {
+                color: rgb(255, 70, 85);
+                transition-duration: 0.3s;
+            }
+            .title {
+                color: rgb(15, 25, 35);
+                font-family: DINNextW1G, Impact, sans-serif;
+                font-weight: 900;
+                font-size: 22px;
+                letter-spacing: 0.5px;
+            }
+            .advertisements {
+                color: rgb(255, 255, 255); 
+                font-family: Tungsten-Bold, Impact, sans-serif;
+                font-size: 30px;
+                font-weight: 400; 
+            }
+            .advertisements:hover {
+                color: rgb(15, 25, 35);
+                transition-duration: 0.3s;
+            }
+            aside .left mark:hover { 
+                color: rgb(255, 70, 85);
+                background-color: transparent;
+                transition-duration: 0.3s;
+            }
+            .title:hover {
+                mark {
+                    color: rgb(255, 70, 85);
+                    background-color: transparent;
+                    transition-duration: 0.3s;
+                }
+                color: rgb(255, 70, 85);
+                background-color: transparent;
+                transition-duration: 0.3s;
+            }
+            .description {
+                color: rgb(15, 25, 35);
+                font-size: 13px;
+                font-family: Tahoma, sans-serif;
+                font-weight: 520;
+                letter-spacing: 1px;
+            }
+            .left .description:hover, .header:hover {
+                color: rgb(255, 70, 85);
+                transition-duration: 0.3s;
+            }
+            mark {
+                background-color: rgb(255, 70, 85);
+                color: rgb(255, 255, 255);
+                padding: 0.75px;
+            }
+            u {
+                color: transparent;
+                text-decoration-line: underline;
+                text-decoration-color: rgb(223, 220, 215);
+                text-decoration-thickness: 3px;
+            }
+
+            /* Footer */
+            .container {
+                position: relative;
+            }
+            .footer {
+                height: 240px;
+                width: 100%;
+                background-image: linear-gradient(rgb(15, 25, 35), rgb(5, 15, 25));
+                color: rgb(255, 255, 255);
+                position: relative;
+                margin-top: 450px;
+                padding-top: 50px;
+            }
+            .footer-info {
+                text-align: center;
+                align-items: center;
+            }
+            .footer .advertisements:hover {
+                color: rgb(255, 70, 85);
+                transition-duration: 0.3s;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header + Search bar-->
+        <header class="box">
+            <h1 class="pdd">PDD News</h1>
+            <div class="icon-container">
+                <img class="icon" src="icon.jpg" alt="PDD News Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search.." aria-label="Search">
+                <img class="search-bar-icon" src="https://www.pngall.com/wp-content/uploads/13/Search-Button-White-PNG.png" alt="Search icon">
+            </div>
+        </header>
+
+        <!-- Nav -->
+        <nav class="box">
+            <div class="nav-h">
+                <ul class="nav-ul">
+                    <li><a class="nav-a" id="nav-active1" href="#">Home</a></li>
+                    <li><a class="nav-a" href="#">Merchandise</a></li>
+                    <li><a class="nav-a" href="#">About</a></li>
+                    <li><a class="nav-a" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Section -->
+        <section class = section>
+            <img src="pdiddy.jpg" alt="Sean Combs" class="center">
+            <div class="caption">Sean "Diddy" Combs</div>
+            
+            <!-- Article -->
+            <article class="content">
+                <aritcle>
+                    <p>Sean Combs, born in Harlem, New York, quickly rose through the music industry's ranks. By the early 1990s, he became a significant figure in hip-hop, establishing Bad Boy Records, the label behind artists like The Notorious B.I.G., Mary J. Blige, and Mase.</p>
+                    <p>His vision expanded beyond music as he launched successful ventures in fashion with his brand, Sean John, and later, investments in beverages, television networks, and sports teams. P. Diddy built an incredible career, rising from humble beginnings to become one of the most influential figures in hip-hop and entertainment. </p>
+                    <p>With Bad Boy Records, he launched the careers of iconic artists, transformed hip-hop fashion with his Sean John brand, and expanded into television and lifestyle ventures. Yet, his successes were often overshadowed by a string of legal controversies and accusations, from nightclub incidents to assault allegations, which marred his public image. </p>    
+                </aritcle>
+                <article>
+                    <h3 class="header"> Watch more: </h3>
+                    <iframe class="vid" width="500" height="300" src="https://www.youtube.com/embed/uHLWlLu1Nak" title="P. Diddy’s ‘Deplorable’ Jail Conditions Under Investigation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <br><br>
+                    <iframe class="vid" width="500" height="300" src="https://www.youtube.com/embed/fdOeYHlbFDo" title="Everything Found in P. Diddy’s Mansion Raids: &#39;1000 Bottles of Baby Oil&#39;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </article>
+            </article>
+        </section>
+
+        <!-- Aside -->
+        <aside class="asides">
+            <!-- Left -->
+            <aside class="left">
+                <span class="header">THE LATEST<br><br></span>
+                <!-- 1 -->
+                <section>
+                    <div class="visuals">
+                        <div class="parent">
+                            <a href="https://www.rollingstone.com/music/music-features/sean-diddy-combs-controversies-timeline-1234889043/">
+                                <img class="child" src="1.png" alt="A Photo Of Sean John Combs (P. Diddy)" title="Click for more information"/>
+                            </a>
+                        </div>
+                    </div>
+                    <p></p>
+                    <span class="logo">PDD NEWS</span>
+                    <span class="border">|</span>
+                    <span class="date">29/10/2024<br></span>
+                    <span class="title">P. DIDDY : <mark>&nbsp;SING OR DIE&nbsp;</mark><br></span>
+                    <p></p>
+                    <span class="description">Every artist has their muse. But only some would <span style="color: rgb(255, 70, 85)">kill</span> for you.<br></span>
+                    <u>ILikePotatosAndCattosLikeForRealsiesRarararar<br></u>
+                </section>
+                <p></p>
+                <!-- 2 -->
+                <section>
+                    <div class="visuals">
+                        <div class="parent">
+                            <a href="https://www.billboard.com/music/chart-beat/beyonce-texas-hold-em-number-1-hot-country-songs-chart-1235610582/">
+                                <img class="child" src="2.png" alt="A Photo Of Beyoncé Giselle Knowles (Queen Bee)" title="Click for more information"/>
+                            </a>
+                        </div>
+                    </div> 
+                    <p></p>
+                    <span class="logo">PDD NEWS</span>
+                    <span class="border">|</span>
+                    <span class="date">29/10/2024<br></span>
+                    <span class="title">BEYONCÉ  // <mark>&nbsp;RIOTS TO THE TOP&nbsp;</mark><br></span>
+                    <p></p>
+                    <span class="description">You do not mess with the "Queen Bee." Even bees can <span style="color: rgb(255, 70, 85)">sting</span>.<br></span>
+                    <u>ILikePotatosAndCattosLikeForRealsiesRarararar<br></u>
+                </section>
+                <p></p>
+                <!-- 3 -->
+                <section>
+                    <div class="visuals">
+                        <div class="parent">
+                            <a href="https://www.britannica.com/biography/Michael-Jackson">
+                                <img class="child" src="3.png" alt="A Photo Of Michael Joseph Jackson (King Of Pop)" title="Click for more information"/>
+                            </a>
+                        </div>
+                    </div>
+                    <p></p>
+                    <span class="logo">PDD NEWS</span>
+                    <span class="border">|</span>
+                    <span class="date">29/10/2024<br></span>
+                    <span class="title">KING OF POP&nbsp;&nbsp;x&nbsp;&nbsp;<mark>&nbsp;BITES THE DUST&nbsp;</mark><br></span>
+                    <p></p>
+                    <span class="description">You know what they say about kings. There is always a <span style="color: rgb(255, 70, 85)">crown</span> to take.<br></span>
+                    <u>ILikePotatosAndCattosLikeForRealsiesRarararar<br></u>
+                </section>
+                <p></p>
+            </aside>
+
+            <!-- Right -->
+            <aside class="right">
+                <!-- RECOMMENDATIONS -->
+                <center class="advertisements">RECOMMENDATIONS</center>
+                <p></p>
+                <section>
+                    <a href="https://www.businessinsider.com/eric-adams-gave-diddy-key-to-nyc-charged-same-month-2024-9">
+                        <center>
+                            <div class="visuals">
+                                <div class="parent">
+                                    <img class="child" src="4.png" alt="A Photo Of Mayor Eric Adams And P. Diddy" title="Click for more information">
+                                </div>
+                            </div>
+                        </center>
+                    </a>
+                    <p></p>
+                </section>
+                <section>
+                    <a href="https://ew.com/music/beyonce-renaissance-tour-by-the-numbers-records/">
+                        <center>
+                            <div class="visuals">
+                                <div class="parent">
+                                    <img class="child" src="5.png" alt="A Photo Of Beyoncé Giselle Knowles (Queen Bee)" title="Click for more information">
+                                </div>
+                            </div>
+                        </center>
+                    </a>
+                    <p></p>
+                </section>
+
+                <!-- PDD NEWS // MERCH -->
+                <center class="advertisements">PDD NEWS // MERCH</center>
+                <p></p>
+                <a href="https://www.nike.com/ph/">
+                    <section>
+                        <center>
+                            <div class="visuals">
+                                <div class="parent">
+                                    <img class="child" src="6.png" alt="A Photo Of PDD News Merchandise" title="Click for more information">
+                                </div>
+                            </div>
+                        </center>
+                        <p></p>
+                    </section>
+                    <section>
+                        <center>
+                            <div class="visuals">
+                                <div class="parent">
+                                    <img class="child" src="7.png" alt="A Photo Of PDD News Merchandise" title="Click for more information">
+                                </div>
+                            </div>
+                        </center>
+                        <p></p>
+                    </section>
+                    <section>
+                        <center>
+                            <div class="visuals">
+                                <div class="parent">
+                                    <img class="child" src="8.png" alt="A Photo Of PDD News Merchandise" title="Click for more information">
+                                </div>
+                            </div>
+                        </center>
+                    </section>
+                </a>
+            </aside>
+        </aside>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-info">
+                    <span class="advertisements" style="font-size: 40px; letter-spacing: 1px">
+                        PDD NEWS
+                        <br>
+                    </span>
+                    <p></p>
+                    <span class="description" style="color: rgb(188, 185, 180)">
+                        PDD News is a news article website focused on the controversies between the famous<br>celebrities, Sean John Combs, Beyoncé Giselle Knowles, and Michael Joseph Jackson.
+                    </span>
+                    <p class="description" style="color: rgb(188, 185, 180)">
+                        Copyright &copy;2024 <a href="#">PDD NEWS</a> 
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
